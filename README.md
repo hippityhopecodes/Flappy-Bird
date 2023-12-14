@@ -1,2 +1,2 @@
 # First push for Python Flappy Bird project
-First push for the flappy bird game made using Python
+## Project based on Clear Code's "Creating a Flappy Bird Clone in Python" YouTube video
