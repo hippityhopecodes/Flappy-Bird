@@ -35,14 +35,14 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit
+                    sys.exit()
 
             # game logic, updates pygame and calls the frame rate
             self.display_surface.fill('black')
             self.all_sprites.update(dt) 
             self.all_sprites.draw(self.display_surface)
 
-            pygame.display.update
+            pygame.display.update()
             self.clock.tick(FRAMERATE)
 
     
