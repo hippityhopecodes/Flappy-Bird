@@ -29,6 +29,7 @@ class Background(pygame.sprite.Sprite):
         self.rect.x = round(self.pos.x)
 
 class Ground(pygame.sprite.Sprite):
+    """ Class which builds the ground of the game """
     def __init__(self,groups,scale_factor):
         super().__init__(groups)
 
@@ -46,3 +47,31 @@ class Ground(pygame.sprite.Sprite):
             self.pos.x = 0
 
         self.rect.x = round(self.pos.x)
+
+class Plane(pygame.sprite.Sprite):
+    def __init__(self, groups, scale_factor):
+        super().__init__(groups)
+
+        #image
+        self.import_frames(scale_factor)
+        self.frame_index = 0
+        self.image = self.frames[self.frame_index]
+
+        #rect
+        self.rect = self.image.get_rect(midleft = (WINDOW_HEIGHT / 20, WINDOW_HEIGHT / 2))
+
+        # animation speed
+        self.animation_speed = 0.1
+
+    def import_frames(self, scale_factor):
+        self.frames = []
+        for i in range(3):
+            surf = pygame.image.load(f'graphics/plane/red{i}.png').convert_alpha()
+            scaled_surface = pygame.transform.scale(surf, pygame.math.Vector2(surf.get_size()) * scale_factor)
+            self.frames.append(scaled_surface)
+    
+    def update(self, dt):
+        self.frame_index += self.animation_speed * dt
+        if self.frame_index >= len(self.frames):
+            self.frame_index = 0
+        self.image = self.frames[int(self.frame_index)]

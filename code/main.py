@@ -1,6 +1,6 @@
 import pygame, sys, time
 from settings import *
-from sprites import Background, Ground
+from sprites import Background, Ground, Plane
 
 class Game:
     """ Class which builds the actual Flappy Bird Game	"""
@@ -23,6 +23,7 @@ class Game:
         # sprite setup
         Background(self.all_sprites, self.scale_factor)
         Ground(self.all_sprites, self.scale_factor)
+        Plane(self.all_sprites, self.scale_factor / 1.6)
 
     def run(self):
         last_time = time.time()
@@ -47,7 +48,7 @@ class Game:
             self.clock.tick(FRAMERATE)
 
     
-# If the current fil is the main file, run the game
+# If the current file is the main file, run the game
 if __name__ == '__main__':
     game = Game()
     game.run()
