@@ -33,6 +33,7 @@ class Ground(pygame.sprite.Sprite):
     """ Class which builds the ground of the game """
     def __init__(self,groups,scale_factor):
         super().__init__(groups)
+        self.sprite_type = 'ground'
 
         # image
         ground_surface = pygame.image.load('graphics/environment/ground.png').convert_alpha()
@@ -108,20 +109,21 @@ class Plane(pygame.sprite.Sprite):
 class Obstacle(pygame.sprite.Sprite):
     def __init__(self,groups,scale_factor):
         super().__init__(groups)
+        self.sprite_type = 'obstacle'
 
         orientation = choice(('up','down'))
-        surf = pygame.image.load(f'graphics/obstacles/{choice((0,1))}.png').convert_alpha()
-        self.image = pygame.transform.scale(surf,pygame.math.Vector2(surf.get_size())*scale_factor)
+        surf = pygame.image.load(f'graphics/obstacles/{choice((0, 1))}.png').convert_alpha()
+        self.image = pygame.transform.scale(surf, pygame.math.Vector2(surf.get_size()) * scale_factor)
 
-        x = WINDOW_WIDTH + randint(40,199)
+        x = WINDOW_WIDTH + randint(40, 100)
 
         if orientation == 'up':
-             y = WINDOW_HEIGHT + randint(10,50)
-             self.rect = self.image.get_rect(midbottom = (x,y))
+             y = WINDOW_HEIGHT + randint(10, 50)
+             self.rect = self.image.get_rect(midbottom = (x, y))
         else:
             y = randint(-50, -10)
-            self.image = pygame.transform.flip(self.image,False,True)
-            self.rect = self.image.get_rect(midtop = (x,y))
+            self.image = pygame.transform.flip(self.image, False, True)
+            self.rect = self.image.get_rect(midtop = (x, y))
     
         self.pos = pygame.math.Vector2(self.rect.topleft)
 
