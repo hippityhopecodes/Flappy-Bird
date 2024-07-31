@@ -1,26 +1,3 @@
-workflows:
-  android-workflow:
-    name: Android Flappy Bird
-    max_build_duration: 60
-    environment:
-      vars:
-        FLUTTER_VERSION: stable
-      flutter: $FLUTTER_VERSION
-      android:
-        image: "android:2021.11.1"
-    scripts:
-      - name: Install dependencies
-        script: |
-          flutter pub get
-      - name: Run tests
-        script: |
-          flutter test
-      - name: Build APK
-        script: |
-          flutter build apk --release
-    artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
-
   ios-workflow:
     name: iOS Flappy Bird
     max_build_duration: 60
