@@ -1,6 +1,6 @@
 import pygame, sys, time
 from settings import *
-from sprites import Background, Ground, Plane
+from sprites import Background, Ground, Plane, Obstacle
 
 class Game:
     """ Class which builds the actual Flappy Bird Game	"""
@@ -25,6 +25,10 @@ class Game:
         Ground(self.all_sprites, self.scale_factor)
         self.plane = Plane(self.all_sprites, self.scale_factor / 1.8)
 
+        # timer for the game
+        self.obstacle_timer = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.obstacle_timer, 1400)
+
     def run(self):
         last_time = time.time()
         while True:
@@ -33,13 +37,16 @@ class Game:
             dt = time.time() - last_time
             last_time = time.time()
             
-            #event loop, handles quit logic and mouse clicks
+            #event loop, handles quit logic, mouse clicks, and obstacle spawning
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.plane.jump()
+                
+                if event.type == self.obstacle_timer:
+                    Obstacle(self.all_sprites, self.scale_factor * 1.1)
 
             # game logic, updates pygame and calls the frame rate
             self.display_surface.fill('black')
